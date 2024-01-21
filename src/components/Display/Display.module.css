@@ -1,0 +1,8 @@
+.display {
+    border: 1px solid #3484e0;
+    padding: .3rem 1.2rem ;
+    border-radius: 10px;
+    font-size: 48px;
+    background-color: #0069f360;
+    width: 80%;
+}

@@ -1,0 +1,26 @@
+.timer_Laps {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+
+}
+
+.timer_Laps ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.timer_Laps li {
+
+    border-bottom: 1px solid #49a0f1;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+}
+
+.timer_Laps li:nth-child(odd) {
+    background-color: #16275e;
+}
+
