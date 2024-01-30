@@ -7,9 +7,9 @@ import LapList from '../LapList/LapList'
 
 const Timer = () => {
 
-  const [ milliseconds, setMilliseconds ] = useState<number> (12232)
-  const [ timerOn, setTimerOn ] = useState<number | null>(null)
-  const [ laps, setLaps ] = useState<number | []> ([])
+  const [ milliseconds, setMilliseconds ] = useState<number> (0)
+  const [timerOn, setTimerOn] = useState<boolean>(false);
+  const [ laps, setLaps ] = useState<string[]> ([])
 
   function formatTime (): string {
     
@@ -21,34 +21,50 @@ const Timer = () => {
     return `${minutes}:${seconds}:${centiseconds}`;
   }
 
-  // const startTimer = (interval: string) => {
-  //   return setInterval ( () => {
-  //     setMilliseconds((prevMilliseconds) => prevMilliseconds + 10)
-  //   })
-  // }
 
-  // const stopTimer = (interval) => {
-  //   clearInterval(interval)
-  //   return interval
-  // }
+const startTimer = (_interval: any) => {
+  return setInterval(() => {
+    setMilliseconds((prevMilliseconds) => prevMilliseconds + 10)
+  }, 10)
+}
 
-  // useEffect (() => {
-  //   let interval: number | null = null;
-    
-  //   if (timerOn) {
-  //     interval = startTimer(interval)
-  //   }else {
-  //     interval = stopTimer(interval)
-  //   }
-  // })
+const stopTimer = (_interval: any) => {
+  clearInterval(_interval)
+  return _interval
+}
+
+const resetTimer: any = () => {
+  setMilliseconds(0)
+  setTimerOn(false)
+  setLaps([])
+}
+
+const addLap: any = () => {
+
+  setLaps([...laps, formatTime()]);
+};
+
+useEffect(() => {
+  
+  let interval: any = null 
+  if (timerOn) {
+     interval = startTimer(interval)
+    } else {
+      interval = stopTimer(interval)
+    }
+    return () => stopTimer(interval)
+},[timerOn])
 
   return (
     <div className={styles.container}>
       <Display time={formatTime()}/>
-      <LapList/>
-      <Controls
-        // onStart={() => setTimeout(true)}
-        // onStop={() => setTimeout(false)}
+      <LapList  laps={laps} />
+      <Controls 
+        timerOn={timerOn}
+        onStart={() => setTimerOn(true)}
+        onStop={() => setTimerOn(false)}
+        onReset={resetTimer}
+        onLap={addLap}
       />
 
     </div>

@@ -8,7 +8,9 @@
 
 .timer_Laps ul {
     list-style-type: none;
+    padding: 0;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 
 }
@@ -18,6 +20,7 @@
     border-bottom: 1px solid #49a0f1;
     padding: .5rem 1rem;
     border-radius: 5px;
+    width: 114px;
 }
 
 .timer_Laps li:nth-child(odd) {

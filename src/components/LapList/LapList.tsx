@@ -1,15 +1,21 @@
-import React from 'react'
-import styles from './LapList.module.css'
+import React from 'react';
+import styles from './LapList.module.css';
 
-const LapList = () => {
+interface LapsProps {
+  laps: string[]
+}
+
+const LapList: React.FC<LapsProps> = ({ laps }) => {
   return (
     <div className={styles.timer_Laps}>
       <h3>Laps: </h3>
       <ul>
-      <li>Lap 1: 01:05</li>
-      <li>Lap 2: 02:06</li>
-    </ul>
-  
+        {laps.map((lap: string, index: number) => (
+          <li key={index}>
+            Lap {index + 1}: {lap}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
